@@ -16,8 +16,10 @@ on:
   push:
     branches:
       - schedule
-  schedule:
-    - cron: '* * * * *'
+
+#  In this branch cron will not execute for this you have put cron in default branch
+  # schedule:
+  #   - cron: '* * * * *'
 
 
 # --------------------------------------------------
