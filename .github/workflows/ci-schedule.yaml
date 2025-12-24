@@ -13,9 +13,8 @@ name: CI Build Workflow
 # - Code is pushed to the "schedule" branch
 # It does NOT run on pull requests or other branches
 on:
-  push:
-    branches:
-      - schedule
+  schedule:
+    - cron: '* * * * *'
 
 # --------------------------------------------------
 # JOB DEFINITIONS
