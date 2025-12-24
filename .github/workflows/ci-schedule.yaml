@@ -10,7 +10,7 @@ name: CI Build Workflow
 # WHEN THIS WORKFLOW EXECUTES
 # --------------------------------------------------
 # This workflow runs automatically when:
-# - Code is pushed to the "schedule" branch
+# - Code is pushed to the "schedule" branch 
 # It does NOT run on pull requests or other branches
 on:
   push:
