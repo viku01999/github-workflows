@@ -1,0 +1,35 @@
+# --------------------------------------------------
+# WORKFLOW NAME
+# --------------------------------------------------
+name: Manual Node.js Workflow
+
+# --------------------------------------------------
+# WHEN THIS WORKFLOW EXECUTES
+# --------------------------------------------------
+# This workflow ONLY runs when:
+# - A user manually clicks "Run workflow" in GitHub UI
+on:
+  workflow_dispatch:
+
+jobs:
+  manual-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout repository
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      # Step 2: Setup Node.js 22.20.0
+      # --------------------------------------------------
+      # Manual workflows must still match production
+      # environments to avoid misleading results
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.20.0
+
+      # Step 3: Verify Node version
+      # Useful for debugging and environment validation
+      - name: Verify Node version
+        run: node -v

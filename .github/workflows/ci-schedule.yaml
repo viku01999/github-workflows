@@ -1,3 +1,5 @@
+# Note:- Always commented no need to run just check after that comment
+
 # --------------------------------------------------
 # WORKFLOW NAME
 # --------------------------------------------------
@@ -8,19 +10,22 @@ name: CI Build Workflow
 # WHEN THIS WORKFLOW EXECUTES
 # --------------------------------------------------
 # This workflow runs automatically when:
-# - Code is pushed to the "main" branch
+# - Code is pushed to the "schedule" branch 
 # It does NOT run on pull requests or other branches
 on:
   push:
     branches:
-      - main
-  schedule:
-    - cron: '* * * * *'
+      - schedule
+
+#  In this branch cron will not execute for this you have put cron in default branch
+  # schedule: 
+  #   - cron: '* * * * *'
+
 
 # --------------------------------------------------
 # JOB DEFINITIONS
 # --------------------------------------------------
-jobs:
+jobs: 
   build:
     # --------------------------------------------------
     # RUNNER (VIRTUAL MACHINE)
@@ -36,6 +41,11 @@ jobs:
       # Without this step, the VM has no project files
       - name: Checkout source code
         uses: actions/checkout@v4
+        with:
+          ref: schedule
+
+      - name: Print branch name
+        run: echo "Running on branch $(git branch --show-current)"
 
       # Step 2: Setup Node.js environment
       # --------------------------------------------------

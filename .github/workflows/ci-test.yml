@@ -1,0 +1,47 @@
+# --------------------------------------------------
+# WORKFLOW NAME
+# --------------------------------------------------
+name: CI Test Workflow
+
+# --------------------------------------------------
+# WHEN THIS WORKFLOW EXECUTES
+# --------------------------------------------------
+# This workflow runs when:
+# - Code is pushed to develop
+# - A pull request targets develop
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+
+jobs:
+  test:
+    # Each test run gets a clean Ubuntu VM
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Download repository code
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      # Step 2: Setup Node.js 22.20.0
+      # --------------------------------------------------
+      # Using the same Node version as build workflow
+      # ensures test results are reliable and consistent
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.20.0
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Run tests
+      # If tests fail, the workflow fails
+      # and the PR cannot be merged
+      - name: Run tests
+        run: npm test
