@@ -19,7 +19,7 @@ on:
 # --------------------------------------------------
 # JOB DEFINITIONS
 # --------------------------------------------------
-jobs:
+jobs: 
   build:
     # --------------------------------------------------
     # RUNNER (VIRTUAL MACHINE)
@@ -35,6 +35,11 @@ jobs:
       # Without this step, the VM has no project files
       - name: Checkout source code
         uses: actions/checkout@v4
+        with:
+          ref: schedule
+
+      - name: Print branch name
+        run: echo "Running on branch $(git branch --show-current)"
 
       # Step 2: Setup Node.js environment
       # --------------------------------------------------
