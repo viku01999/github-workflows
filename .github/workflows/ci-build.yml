@@ -1,0 +1,62 @@
+# --------------------------------------------------
+# WORKFLOW NAME
+# --------------------------------------------------
+# This name appears in the GitHub Actions UI
+name: CI Build Workflow
+
+# --------------------------------------------------
+# WHEN THIS WORKFLOW EXECUTES
+# --------------------------------------------------
+# This workflow runs automatically when:
+# - Code is pushed to the "main" branch
+# It does NOT run on pull requests or other branches
+on:
+  push:
+    branches:
+      - main
+
+# --------------------------------------------------
+# JOB DEFINITIONS
+# --------------------------------------------------
+jobs:
+  build:
+    # --------------------------------------------------
+    # RUNNER (VIRTUAL MACHINE)
+    # --------------------------------------------------
+    # GitHub provides a fresh Ubuntu VM for every run
+    runs-on: ubuntu-latest
+
+    # --------------------------------------------------
+    # STEPS EXECUTED IN ORDER
+    # --------------------------------------------------
+    steps:
+      # Step 1: Checkout repository code
+      # Without this step, the VM has no project files
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      # Step 2: Setup Node.js environment
+      # --------------------------------------------------
+      # WHY node-version: 22.20.0?
+      # - Keeps Node version consistent across:
+      #   developer machines, CI, and production
+      # - Prevents unexpected failures due to Node upgrades
+      # - Ensures predictable and stable builds
+      #
+      # WHAT HAPPENS HERE:
+      # - Node.js 22.20.0 is installed on the VM
+      # - node & npm become available for next steps
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.20.0
+
+      # Step 3: Install dependencies
+      # Reads package.json and installs required libraries
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Build the project
+      # Compiles TypeScript into JavaScript
+      - name: Build application
+        run: npm run build
