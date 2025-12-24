@@ -18,7 +18,7 @@ on:
       - schedule
 
 #  In this branch cron will not execute for this you have put cron in default branch
-  # schedule:
+  # schedule: 
   #   - cron: '* * * * *'
 
 
