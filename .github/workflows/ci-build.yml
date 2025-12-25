@@ -62,7 +62,7 @@ jobs:
 
       # Step 4: Build the project
       # Compiles TypeScript into JavaScript
-      # - name: Build application
+      # - name: Build application 
       #   run: npm run build
 
       - name: Build application
