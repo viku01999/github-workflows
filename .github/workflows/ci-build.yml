@@ -27,6 +27,8 @@ jobs:
     # --------------------------------------------------
     # GitHub provides a fresh Ubuntu VM for every run
     runs-on: ubuntu-latest
+    env:
+      APP_PORT: ${{ secrets.APP_PORT }}
 
     # --------------------------------------------------
     # STEPS EXECUTED IN ORDER
@@ -64,8 +66,6 @@ jobs:
       #   run: npm run build
 
       - name: Build application
-        env:
-          APP_PORT: ${{ secrets.APP_PORT }}
         run: |
-          echo "Building app on port $APP_PORT"
+          echo "APP_PORT is set? -> ${APP_PORT:+yes}"
           npm run build
