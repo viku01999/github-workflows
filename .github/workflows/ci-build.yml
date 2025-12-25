@@ -60,5 +60,12 @@ jobs:
 
       # Step 4: Build the project
       # Compiles TypeScript into JavaScript
+      # - name: Build application
+      #   run: npm run build
+
       - name: Build application
-        run: npm run build
+        env:
+          APP_PORT: ${{ secrets.APP_PORT }}
+        run: |
+          echo "Building app on port $APP_PORT"
+          npm run build
