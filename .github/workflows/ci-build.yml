@@ -66,6 +66,9 @@ jobs:
       #   run: npm run build
 
       - name: Build application
+        env:
+          APP_PORT: ${{ secrets.APP_PORT }}
         run: |
-          echo "APP_PORT is set? -> ${APP_PORT:+yes}"
+          echo "APP_PORT value is: $APP_PORT"
           npm run build
+
